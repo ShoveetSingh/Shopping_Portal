@@ -2,12 +2,14 @@
  
 require 'connection.php';
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $username=$_POST['username'];
     $password=$_POST['password'];
     $sql = "INSERT INTO usernames (name, password) VALUES ('$username','$password')";
-    if(mysqli_query($conn, $sql)){
+    if(executeQuery($conn, $sql)){
         echo "Registration Successfull!";
+        header('Location:details.php');
+        exit();
     }
     else{
         echo "Registration failed!";
