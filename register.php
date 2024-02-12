@@ -1,5 +1,5 @@
- <?php
- 
+<?php
+  
 require 'connection.php';
 
 if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
@@ -7,7 +7,7 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $password=$_POST['password'];
     $sql = "INSERT INTO usernames (name, password) VALUES ('$username','$password')";
     if(executeQuery($conn, $sql)){
-        echo "Registration Successfull!";
+        echo "Registration Successfull!"; 
         header('Location:details.php');
         exit();
     }
@@ -28,6 +28,7 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         Username: <input type="text" name="username" required><br><br>
         Password: <input type="password" name="password" required><br><br>
         <input type="submit" name="submit" value="Register">
-    </form>
+</form>
+<h2>Already a user? <a href="login.php">Login</a></h2>
 </body>
-</html>
+</html>  
