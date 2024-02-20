@@ -4,12 +4,17 @@ require "connection.php";
 if(isset($_SERVER['REQUEST_METHOD'])&&$_SERVER["REQUEST_METHOD"]=="POST"){
     $name=$_POST['name'];
     $sql="DELETE FROM usernames WHERE name='$name'";
-    $result=executeQuery($conn,$sql);
+    $result=executeQuery($conn,$sql); 
     if($result){
-        header('Location:register.php');
+        if(mysqli_affected_rows($conn)>0){
+            header('Location:register.php');
+        }
+       else{
+              echo "<script>alert('Please enter correct username');</script>";
+       }
     }
     else{
-        echo "<script>alert('Please enter correct username');</script>";
+        echo "<script>alert('Error deleting username!');</script>";
     }
 }
 
