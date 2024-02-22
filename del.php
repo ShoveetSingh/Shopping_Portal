@@ -3,21 +3,20 @@ require "connection.php";
 
 if(isset($_SERVER['REQUEST_METHOD'])&&$_SERVER["REQUEST_METHOD"]=="POST"){
     $name=$_POST['name'];
-    $sql="DELETE FROM usernames WHERE name='$name'";
+    $sql="DELETE FROM usernames WHERE password='$name'";
     $result=executeQuery($conn,$sql); 
     if($result){
         if(mysqli_affected_rows($conn)>0){
             header('Location:register.php');
         }
        else{
-              echo "<script>alert('Please enter correct username');</script>";
+              echo "<script>alert('Please enter correct password');</script>";
        }
     }
     else{
         echo "<script>alert('Error deleting username!');</script>";
     }
-}
-
+} 
 ?>
 
 <!Doctype html>
@@ -26,9 +25,8 @@ if(isset($_SERVER['REQUEST_METHOD'])&&$_SERVER["REQUEST_METHOD"]=="POST"){
     <head><title>Delete ur account</title></head>
     <body>
           <form action="del.php" method="post">
-            Enter your username to verify:<br><input type="text" name="name" required>
+            Enter your password to verify:<br><input type="password" name="name" required>
             <input type="submit" value="Delete">
-</form>
 </form>
 
     </body>
