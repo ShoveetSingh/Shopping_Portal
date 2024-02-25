@@ -5,8 +5,9 @@ require 'connection.php';
 if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $username=$_POST['username'];
     $password=$_POST['password'];
+    if (!("SElECT * FROM usernames WHERE name = '$username' OR password = '$password'")){
     $sql = "INSERT INTO usernames (name, password) VALUES ('$username','$password')";
-    if(executeQuery($conn, $sql)){
+     if(executeQuery($conn, $sql)){
         echo "Registration Successfull!"; 
         header('Location:details.php');
         exit();
@@ -14,6 +15,10 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     else{
         echo "Registration failed!";
     }
+}
+else{
+    echo "<p style='font-family:Lucida Handwriting,cursive; font-Size:30px; color:red;'>Username already exists! or Password already taken!!!</p>";
+}
 }
 ?>
 

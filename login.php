@@ -14,7 +14,8 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         exit();
     }
     else{
-        echo "<script>alert('Username or password unsuccessfull!');</script>";
+        //header('Location:login.php');
+        echo "<p style='font-size:30px; font-family:Lucida Handwriting,cursive; color:red;'> Username or password unsuccessfull!</p>";
         exit();
     }
 }

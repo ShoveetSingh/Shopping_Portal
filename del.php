@@ -10,7 +10,8 @@ if(isset($_SERVER['REQUEST_METHOD'])&&$_SERVER["REQUEST_METHOD"]=="POST"){
             header('Location:register.php');
         }
        else{
-              echo "<script>alert('Please enter correct password');</script>";
+        echo "<p style='font-family:Lucida Handwriting,cursive; font-Size:30px; color:red;'>Please Enter correct password!</p>";
+              
        }
     }
     else{
@@ -18,7 +19,7 @@ if(isset($_SERVER['REQUEST_METHOD'])&&$_SERVER["REQUEST_METHOD"]=="POST"){
     }
 } 
 ?>
-
+ 
 <!Doctype html>
 
 <html>
@@ -28,6 +29,6 @@ if(isset($_SERVER['REQUEST_METHOD'])&&$_SERVER["REQUEST_METHOD"]=="POST"){
             Enter your password to verify:<br><input type="password" name="name" required>
             <input type="submit" value="Delete">
 </form>
-
+   
     </body>
     </html>
