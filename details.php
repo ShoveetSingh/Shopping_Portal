@@ -1,6 +1,14 @@
 <?php
 
-require 'connection.php';
+session_start();
+
+if(isset($_SESSION['username'])) {
+    echo "Hello ".$_SESSION['username']."! You are logged in!";
+} else {
+    echo "Hello guest! Please log in.";
+}
+
+  require 'connection.php';
 
 $api_url = 'https://fakestoreapi.com/products/9';
 $data_json = file_get_contents($api_url);

@@ -1,15 +1,21 @@
 <?php
+session_start();
 
 require 'connection.php'; 
+
+
 
 if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
   
     $username=$_POST['username'];
     $password=$_POST['password'];
+    
+
     $sql = "SELECT name,password FROM usernames WHERE name = '$username' AND password = '$password'";
     $result = executeQuery($conn,$sql);
     if(mysqli_num_rows($result)>0 && $result!=null){
         //echo "Login Successfull!";
+        $_SESSION['username'] = $username;
         header('Location:details.php');
         exit();
     }
