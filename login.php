@@ -3,8 +3,6 @@ session_start();
 
 require 'connection.php'; 
 
-
-
 if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
   
     $username=$_POST['username'];

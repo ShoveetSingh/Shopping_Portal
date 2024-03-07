@@ -1,8 +1,12 @@
 <?php
-  
+
+
 require 'connection.php';
 
+require 'routes/routes.php';
+ 
 
+ 
 if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $username=$_POST['username'];
     $password=$_POST['password'];
@@ -10,10 +14,13 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $result_check_username_password = executeQuery($conn, $sql_check_username_password);
     if (mysqli_num_rows($result_check_username_password)==0){
     $sql = "INSERT INTO usernames (name, password) VALUES ('$username','$password')";
-     if(executeQuery($conn, $sql)){
+     
+    if(executeQuery($conn, $sql)){
         echo "Registration Successfull!";
         setcookie("username", $username, time() + (86400 * 30), "/");
         header('Location:details.php');
+        $_SESSION['username'] = $username;
+        //echo "Hello ".$_Cookies['username']."! You are signed up!";
         exit();
     }
     else{
@@ -22,11 +29,9 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
 }
 else{
     echo "<p style='font-family:Lucida Handwriting,cursive; font-Size:30px; color:red;'>Username already exists! or Password already taken!!!</p>";
+    
 }
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -43,4 +48,4 @@ else{
 </form>
 <h2>Already a user? <a href="login.php">Login</a></h2>
 </body>
-</html>  
+</html>    

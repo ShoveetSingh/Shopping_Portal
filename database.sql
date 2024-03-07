@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS `products` (
     PRIMARY KEY (`id`)
 )
 
+ALTER TABLE `products` ADD COLUMN `image` VARCHAR(255) NOT NULL AFTER `id`;
+
 CREATE TABLE IF NOT EXISTS `usernames` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
