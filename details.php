@@ -1,6 +1,10 @@
 <?php
 
+//require 'styles/font.php';
+
 session_start();
+
+require 'connection.php';
 
 if(isset($_SESSION['username'])) {
     echo "Hello ".$_SESSION['username']."! You are logged in!";
@@ -9,7 +13,7 @@ if(isset($_SESSION['username'])) {
     //header('Location:register.php');
 }
 
-  require 'connection.php';
+  
 
 $api_url = 'https://fakestoreapi.com/products/9';
 $data_json = file_get_contents($api_url);
@@ -51,7 +55,9 @@ if(isset($_SERVER['REQUEST_METHOD'])){
 <!DOCTYPE html>
 <html>   
     <head>
-        <title>Product Details</title>  
+        <title>Product Details</title> 
+        <link rel = "stylesheet" type = "text/css" href = "styles/font.php"> 
+        </head>
         <body>
             <?php
          $api_url = 'https://fakestoreapi.com/products';
@@ -60,11 +66,11 @@ if(isset($_SERVER['REQUEST_METHOD'])){
          if($data_array!=null){
                 echo "<table border='2'>";
                 echo "<tr>";
-                echo "<th style='font-family:Lucida Roboto,sans-serif;font-Size:30px;color:Tomato'>Product_Image</th>";
-                echo "<th style='font-family:Lucida Roboto,sans-serif;font-Size:30px;color:Orange'>Product Name</th>";
-                echo "<th style='font-family:Lucida Roboto,sans-serif;font-Size:30px;color:violet'>Price($)</th>";
-                echo "<th style='font-family:Lucida Roboto,sans-serif;font-Size:30px;color:green'>Description</th>";
-                echo "<th style='font-family:Lucida Roboto,sans-serif;font-Size:30px;'>Wishlist</th>";
+                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:Tomato font-style:italic'>Product_Image</th>";
+                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:Orange'>Product Name</th>";
+                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:violet'>Price($)</th>";
+                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:green'>Description</th>";
+                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;'>Wishlist</th>";
                 echo "</tr>";
                 foreach($data_array as $product){
                     echo "<tr>";
@@ -83,6 +89,5 @@ if(isset($_SERVER['REQUEST_METHOD'])){
          }
          
          ?>   
-        </body>
-    </head>  
+        </body>  
 </html>
