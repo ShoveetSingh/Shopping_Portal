@@ -6,39 +6,40 @@ session_start();
 
 require 'connection.php';
 
-if(isset($_SESSION['username'])) {
+if(isset($_SESSION['username'])) { 
     echo "Hello ".$_SESSION['username']."! You are logged in!";
 } else {
     echo "Hello guest! Please log in.";
     //header('Location:register.php');
 }
+ 
 
-  
-
-$api_url = 'https://fakestoreapi.com/products/9';
-$data_json = file_get_contents($api_url);
+$api_url = 'https://fakestoreapi.com/products';
+ $data_json = file_get_contents($api_url);
 
 $data_array = json_decode($data_json,true);
 
-if($data_array!=null){
-    $image = $data_array['image'];
-    $name = $data_array['title'];
-    $price = $data_array['price'];
-    $description = $data_array['description'];
+if($data_array!=null){ 
+    foreach($data_array as $product){
+    $image = mysqli_real_escape_string($conn,$product['image']);
+    $name = mysqli_escape_string($conn,$product['title']);
+    $price = mysqli_escape_string($conn,$product['price']);
+    $description = mysqli_escape_string($conn,$product['description']) ;
 
-    $sql = "INSERT INTO products (image,name, price ,description) VALUES (' $image','$name','$price','$description')";
+    $sql = "INSERT INTO products (image,name, price ,description) VALUES ('$image','$name','$price','$description')";
     if(executeQuery($conn,$sql)){
-        echo "Product details added successfully!";
+        echo " ";
     }
     else{
         echo "Product details addition failed!";
     
     }
+    }
 }
-else{
+else{ 
     echo"Data not found!";
 }
-
+  
 if(isset($_SERVER['REQUEST_METHOD'])){
     // $sql = "INSERT INTO wishlist (name, price ,description) VALUES ('$name','$price','$description')";
     // if(executeQuery($conn,$sql)){
@@ -46,7 +47,6 @@ if(isset($_SERVER['REQUEST_METHOD'])){
     // }
     // else{
     //     echo "Product addition to wishlist failed!";
-    
     // }
       echo "<script>alert('Products added to ur wishlist!')</script>";
 }
@@ -79,9 +79,11 @@ if(isset($_SERVER['REQUEST_METHOD'])){
                     echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-Size:25px;\">" . $product['price'] . "</td>";
                     echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-Size:25px;\">" . $product['description'] . "</td>";
                     echo "<td>
-                    <form method='post' action='details.php'>
-                    <input type='submit' name = 'clicked' value = 'add'></td>;
-                    <form>";
+                    <form method='post' action='wishlist.php'>
+                    <input type='hidden' name='product' value='".json_encode($product). "'>
+                    <input type='submit' name = 'clicked' value = 'Add'>
+                    <form>
+                    </td>";
                     echo "</tr>";
                 }
                 

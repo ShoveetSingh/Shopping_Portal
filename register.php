@@ -3,7 +3,7 @@
 
 require 'connection.php';
 
-require 'routes/routes.php';
+//require 'routes/routes.php';
  
 
  
@@ -41,6 +41,10 @@ else{
 </head>
 <body>
     <h2>User Registration</h2>
+    
+    <audio autoplay loop>
+                <source src = "Vande Mataram - (Raag.Fm).mp3" type ="audio/mpeg">
+             </audio>
     <form method="post" action="register.php">
         Username: <input type="text" name="username" required><br><br>
         Password: <input type="password" name="password" required><br><br>
