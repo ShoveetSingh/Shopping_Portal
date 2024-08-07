@@ -1,5 +1,5 @@
 <?php
-
+ 
 //require 'styles/font.php';
 
 session_start();
@@ -10,11 +10,11 @@ if(isset($_SESSION['username'])) {
     echo "Hello ".$_SESSION['username']."! You are logged in!";
 } else {
     echo "Hello guest! Please log in.";
-    //header('Location:register.php');
+    //header('Location:register.php ');
 }
  
 
-$api_url = 'https://fakestoreapi.com/products';
+$api_url = ' https://api.escuelajs.co/api/v1/products';
  $data_json = file_get_contents($api_url);
 
 $data_array = json_decode($data_json,true);
@@ -39,17 +39,6 @@ if($data_array!=null){
 else{ 
     echo"Data not found!";
 }
-  
-if(isset($_SERVER['REQUEST_METHOD'])){
-    // $sql = "INSERT INTO wishlist (name, price ,description) VALUES ('$name','$price','$description')";
-    // if(executeQuery($conn,$sql)){
-    //     echo "Product added to wishlist!";
-    // }
-    // else{
-    //     echo "Product addition to wishlist failed!";
-    // }
-      echo "<script>alert('Products added to ur wishlist!')</script>";
-}
 ?>
 
 <!DOCTYPE html>
@@ -60,29 +49,29 @@ if(isset($_SERVER['REQUEST_METHOD'])){
         </head>
         <body>
             <?php
-         $api_url = 'https://fakestoreapi.com/products';
+         $api_url = 'https://api.escuelajs.co/api/v1/products';
          $data_json = file_get_contents($api_url);
          $data_array = json_decode($data_json,true);
-         if($data_array!=null){
+         if($data_array!=null){  
                 echo "<table border='2'>";
                 echo "<tr>";
-                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:Tomato font-style:italic'>Product_Image</th>";
-                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:Orange'>Product Name</th>";
-                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:violet'>Price($)</th>";
-                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;color:green'>Description</th>";
-                echo "<th style='font-family:  Oswald,sans-serif;font-Size:30px;'>Wishlist</th>";
+                echo "<th style='font-family:Oswald,sans-serif;font-Size:30px;color:Tomato font-style:italic'>Product_Image</th>";
+                echo "<th style='font-family:Oswald,sans-serif;font-Size:30px;color:Orange'>Product Name</th>";
+                echo "<th style='font-family:Oswald,sans-serif;font-Size:30px;color:violet'>Price($)</th>";
+                echo "<th style='font-family:Oswald,sans-serif;font-Size:30px;color:green'>Description</th>";
+                echo "<th style='font-family:Oswald,sans-serif;font-Size:30px;'>Wishlist</th>";
                 echo "</tr>";
                 foreach($data_array as $product){
                     echo "<tr>";
-                    echo "<td><img src='" . $product['image'] . "' alt='product image' width='300' height='300'></td>";
-                    echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-Size:25px;\">" . $product['title'] . "</td>";
-                    echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-Size:25px;\">" . $product['price'] . "</td>";
-                    echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-Size:25px;\">" . $product['description'] . "</td>";
+                    echo "<td><img src='" . $product['category']['image'] . "' alt='product image' width='300' height='300'></td>";
+                    echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-size:25px;\">" . $product['title'] . "</td>";
+                    echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-size:25px;\">" . $product['price'] . "</td>";
+                    echo "<td style=\"font-family: 'Times New Roman', Times, serif;font-size:25px;\">" . $product['description'] . "</td>";
                     echo "<td>
                     <form method='post' action='wishlist.php'>
-                    <input type='hidden' name='product' value='".json_encode($product). "'>
+                    <input type='hidden' name='product' value='".json_encode($product)."'>
                     <input type='submit' name = 'clicked' value = 'Add'>
-                    <form>
+                    </form>
                     </td>";
                     echo "</tr>";
                 }

@@ -1,12 +1,10 @@
 <?php
 
-
 require 'connection.php';
 
 //require 'routes/routes.php';
  
-
- 
+   
 if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $username=$_POST['username'];
     $password=$_POST['password'];
@@ -15,14 +13,14 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     if (mysqli_num_rows($result_check_username_password)==0){
     $sql = "INSERT INTO usernames (name, password) VALUES ('$username','$password')";
      
-    if(executeQuery($conn, $sql)){
+    if(executeQuery($conn, $sql)){ 
         echo "Registration Successfull!";
         setcookie("username", $username, time() + (86400 * 30), "/");
         header('Location:details.php');
         $_SESSION['username'] = $username;
         //echo "Hello ".$_Cookies['username']."! You are signed up!";
         exit();
-    }
+    } 
     else{
         echo "Registration failed!";
     }
@@ -34,7 +32,7 @@ else{
 }
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE >
 <html>
 <head>
     <title>User Registration</title>

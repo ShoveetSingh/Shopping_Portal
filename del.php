@@ -8,6 +8,7 @@ if(isset($_SERVER['REQUEST_METHOD'])&&$_SERVER["REQUEST_METHOD"]=="POST"){
     if($result){
         if(mysqli_affected_rows($conn)>0){
             header('Location:register.php');
+            session_destroy();
         }
        else{
         echo "<p style='font-family:Lucida Handwriting,cursive; font-Size:30px; color:red;'>Please Enter correct password!</p>";

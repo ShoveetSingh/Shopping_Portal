@@ -1,19 +1,25 @@
 <?php
-require 'connection.php';
 
 if(isset($_POST['clicked'])){
-    $click = $_POST["product"];
-    
-    // Check if $click is not empty and is a valid JSON string
+    $click = $_POST['product'];
+    // $debug = '"}';
+    // $click = $click.$debug;
+    // echo $click;
+
+    echo "<h1>see ur saved items<br></h1>";   
     if (!empty($click) && function_exists('json_last_error')) {
-        $product = json_decode($click, true);
-        var_dump($product);
+        
+         $product = json_decode($click, true,2048); 
+
         
         // Check if $product is not null and has a 'title' key
-        if ($product!== null && isset($product['image'])) {
-            echo $product['image'];
+        if ($product!= null && isset($product['category']['image'])) {
+            print "<img src=" . $product['category']['image'] . " height=200px width=200px>";
+            echo$product['title'];
+            echo"<br>";
+            echo$product['description'];
         } else {
-            echo "Product title could not be retrieved.";
+            echo "  Product image could not be retrieved.";
         }
     } else {
         echo "Invalid product data.";
@@ -21,14 +27,3 @@ if(isset($_POST['clicked'])){
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ur wishlist</title>
-    <link rel="stylesheet" type="text/css" href="styles/font.php">
-    <h1>See your saved items</h1>
-</head>
-<body>
-    <!-- Your HTML content here -->
-</body>
-</html> 
