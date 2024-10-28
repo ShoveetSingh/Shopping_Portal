@@ -1,6 +1,4 @@
 <?php
- 
-//require 'styles/font.php';
 
 session_start();
 
@@ -10,34 +8,6 @@ if(isset($_SESSION['username'])) {
     echo "Hello ".$_SESSION['username']."! You are logged in!";
 } else {
     echo "Hello guest! Please log in.";
-    //header('Location:register.php ');
-}
- 
-
-$api_url = ' https://api.escuelajs.co/api/v1/products';
- $data_json = file_get_contents($api_url);
-
-$data_array = json_decode($data_json,true);
-
-if($data_array!=null){ 
-    foreach($data_array as $product){
-    $image = mysqli_real_escape_string($conn,$product['image']);
-    $name = mysqli_escape_string($conn,$product['title']);
-    $price = mysqli_escape_string($conn,$product['price']);
-    $description = mysqli_escape_string($conn,$product['description']) ;
-
-    $sql = "INSERT INTO products (image,name, price ,description) VALUES ('$image','$name','$price','$description')";
-    if(executeQuery($conn,$sql)){
-        echo " ";
-    }
-    else{
-        echo "Product details addition failed!";
-    
-    }
-    }
-}
-else{ 
-    echo"Data not found!";
 }
 ?>
 
@@ -84,8 +54,7 @@ else{
                 }
                 
                 echo "</table>";
-         }
-         
+         }  
          ?>   
         </body>  
 </html>

@@ -1,18 +1,13 @@
 <?php
 
-session_start();
-
 if(isset($_POST['clicked'])){
     $click = $_POST['product'];
-    // $debug = '"}';
-    // $click = $click.$debug;
-    // echo $click;
 
     echo "<h1>see ur saved items<br></h1>";   
     if (!empty($click) && function_exists('json_last_error')) {
         
          $product = json_decode($click, true,2048); 
-
+        
         
         // Check if $product is not null and has a 'title' key
         if ($product!= null && isset($product['category']['image'])) {
@@ -28,4 +23,3 @@ if(isset($_POST['clicked'])){
     }
 }
 ?>
-
