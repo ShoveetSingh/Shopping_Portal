@@ -49,6 +49,13 @@ else{
         </head>
         <body>
             <?php
+            //logout 
+
+         echo "<form method='post' action='logout.php'>
+         <input type='submit' name='logout' value='logout!'>
+         <form/>";
+       
+
          $api_url = 'https://api.escuelajs.co/api/v1/products';
          $data_json = file_get_contents($api_url);
          $data_array = json_decode($data_json,true);

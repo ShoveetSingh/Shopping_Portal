@@ -19,3 +19,13 @@ CREATE TABLE IF NOT EXISTS `usernames` (
     `password` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
 )
+
+
+CREATE TABLE IF NOT EXISTS `wishlist`(
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `image` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `price` VARCHAR(255) NOT NULL,
+    `description` VARCHAR(255) NOT NULL,
+    PRIMARY KEY(`id`)
+)

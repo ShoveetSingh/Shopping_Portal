@@ -1,5 +1,13 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 require 'connection.php';
 
 //require 'routes/routes.php';
@@ -11,8 +19,35 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $sql_check_username_password = "SELECT * FROM usernames WHERE name = '$username' OR password = '$password'";
     $result_check_username_password = executeQuery($conn, $sql_check_username_password);
     if (mysqli_num_rows($result_check_username_password)==0){
-    $sql = "INSERT INTO usernames (name, password) VALUES ('$username','$password')";
+
+    $mail = new PHPMailer(true);
+     try{
+       $mail->isSMTP();
+       $mail->Host = "smtp.gmail.com";
+       $mail->SMTPAuth=true;
+       $mail->Username="shoveetsingh2002@gmail.com";
+       $mail->Password="gzny aoxq zdhk avui";
+       $mail->SMTPSecure="tls";//PHPMailer::ENCRYPTION_STARTTLS
+       $mail->Port=587;
+       $mail->setFrom("shoveetsingh2002@gmail.com","Shoveet");
+       $mail->addAddress($username,"Batista");
+       $mail->Subject="User id authentication";
+       $mail->Body="hello bro!!!";
+      // $mail->SMTPDebug=1;
+        $mail->send();
+       echo "Mail Sent Successfully!";
+
+       $sql = "INSERT INTO usernames (name, password) VALUES ('$username','$password')";
+     }
+     catch(Exceptione  $e){
+        echo "Mail not sent error!";
+     }
+
      
+   
+
+
+
     if(executeQuery($conn, $sql)){ 
         echo "Registration Successfull!";
         setcookie("username", $username, time() + (86400 * 30), "/");

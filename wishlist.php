@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 if(isset($_POST['clicked'])){
     $click = $_POST['product'];
     // $debug = '"}';
