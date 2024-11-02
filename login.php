@@ -40,5 +40,9 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
         <!-- <form method="get" action="login.php">
         <input type="submit" value="Delete ur id" > 
         </form> -->
+        <div style=" display:flex; justify-content:center;  align-items:left;">
+        <a style="color:green;" href="forgo.php">forget password!</a><br><br>
+</div>
+
         <a href="del.php">Delete account!!!</a>
     </body>
