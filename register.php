@@ -12,7 +12,23 @@ require 'PHPMailer/src/SMTP.php';
 
 require 'connection.php';
  
-   
+$body = '
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+';   
+
+
 if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
     $username=$_POST['username'];
     $password=$_POST['password'];
@@ -26,14 +42,14 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
        $mail->Host = "smtp.gmail.com";
        $mail->SMTPAuth=true;
        $mail->Username="shoveetsingh2002@gmail.com";
-       $mail->Password="gzny aoxq zdhk avui";
+       $mail->Password="almi wrxo nrbz ncgu";
        $mail->SMTPSecure="tls";//PHPMailer::ENCRYPTION_STARTTLS
        $mail->Port=587;
        $mail->setFrom("shoveetsingh2002@gmail.com","Shoveet");
        $mail->addAddress($username,"Batista");
        $mail->Subject="User id authentication";
-       $mail->Body="hello bro!!!";
-      // $mail->SMTPDebug=1;
+       //$mail->Body="hello bro!!!";
+       $mail->msgHTML($body);
         $mail->send();
        echo "Mail Sent Successfully!";
 
@@ -42,11 +58,6 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
      catch(Exceptione  $e){
         echo "Mail not sent error!";
      }
-
-     
-   
-
-
 
     if(executeQuery($conn, $sql)){ 
         echo "Registration Successfull!";
@@ -62,7 +73,6 @@ if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
 }
 else{
     echo "<p style='font-family:Lucida Handwriting,cursive; font-Size:30px; color:red;'>Username already exists! or Password already taken!!!</p>";
-    
 }
 }
 ?>
@@ -79,7 +89,7 @@ else{
                 <source src = "Vande Mataram - (Raag.Fm).mp3" type ="audio/mpeg">
              </audio>
     <form method="post" action="register.php">
-        Username: <input type="text" name="username" required><br><br>
+        User-mail: <input type="text" name="username" required><br><br>
         Password: <input type="password" name="password" required><br><br>
         <input type="submit" name="submit" value="Register">
 </form>

@@ -1,4 +1,4 @@
-<php
+<?php
 require 'connection.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -11,26 +11,40 @@ require 'PHPMailer/src/SMTP.php';
 
 if (isset($_SERVER["REQUEST_METHOD"]) &&$_SERVER["REQUEST_METHOD" ] == "POST"){
 
-$user=$_POST["name"] ;
+$body='
+<html>
+<head>
+<title>pasword reset</title>
+</head>
+<body>
+<h1> Click on the below link to reset password</h1>
+<a href="https://localhost/My_PHP_Project/mail.php">Click on me</a>
+</body>
+</html>
+';
+
+$user=$_POST["mail"] ;
 
 $mail = new PHPMailer(true);
 try{
- $mail->SMTP();
- $mail->HOST = "smtp.gmail.com";
+ $mail->isSMTP();
+ $mail->Host = "smtp.gmail.com";
  $mail->SMTPAuth=true;
  $mail->Username="shoveetsingh2002@gmail.com";
-       $mail->Password="gzny aoxq zdhk avui";
+       $mail->Password="almi wrxo nrbz ncgu";
        $mail->SMTPSecure="tls";//PHPMailer::ENCRYPTION_STARTTLS
        $mail->Port=587;
        $mail->setFrom("shoveetsingh2002@gmail.com","Shoveet");
-       $mail->addAddress($username,"Batista");
-       $mail->Subject="User id authentication";
-       $mail->Body="hello bro!!!";
+       $mail->addAddress($user,"user");
+       $mail->Subject="User account recovery.";
+       $mail->msgHTML($body);
+      // $mail->body=' Click on the below link to change password.' ;
         $mail->send();
-       echo "Mail Sent Successfully!";
+      // echo "Mail Sent Successfully!";
+      header("Location:login.php");
 }
 catch(Exception $e){
-  echo"MAil not sent!";
+  echo "MAil not sent!";
 }
 }
 ?>
